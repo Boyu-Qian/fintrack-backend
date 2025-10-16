@@ -1,8 +1,4 @@
 import os
-from dotenv import load_dotenv
-
-load_dotenv()
-
 
 class Config:
     try:
@@ -21,10 +17,9 @@ class Config:
         raise ValueError("DTABASE_URL environment valriable is not set")
     SQLALCHEMY_TRACK_MODIFICATIONS = False
 
-    public_key_path = os.environ.get("PUBLIC_KEY_PATH")
+    public_key_path = os.environ.get("PUBLIC_KEY_PATH","/app/public.pem")
     if os.path.exists(public_key_path):
-        with open(public_key_path) as f:
+        with open(public_key_path, "r") as f:
             PUBLIC_KEY = f.read()
     else:
-        PUBLIC_KEY = os.environ.get("PUBLIC_KEY_PATH","")
-    PUBLIC_KEY = PUBLIC_KEY
+        raise RuntimeError(f"Public key file not found at {PUBLIC_KEY_PATH}")
