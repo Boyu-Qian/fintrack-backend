@@ -17,4 +17,9 @@ class Config:
         )
     print(SQLALCHEMY_DATABASE_URI)
     SQLALCHEMY_TRACK_MODIFICATIONS = False
-    PRIVATE_KEY = PRIVATE_KEY
+    PRIVATE_KEY_PATH = os.environ.get("PRIVATE_KEY_PATH", "app/private.pem")
+    if os.path.exists(PRIVATE_KEY_PATH):
+        with open(PRIVATE_KEY_PATH, "r") as f:
+            PRIVATE_KEY = f.read()
+    else:
+        raise RuntimeError(f"Private key file not found at {PRIVATE_KEY_PATH}")

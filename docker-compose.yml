@@ -7,6 +7,10 @@ services:
       - "32222:32222"
     env_file:
       - /root/env/user-env
+    volumes:
+      - /root/env/private.pem:/app/private.pem:ro
+    environment:
+      - PRIVATE_KEY_PATH=/app/private.pem
 
   transaction-service:
     build: ./transaction-service
@@ -15,6 +19,10 @@ services:
       - "32223:32223"
     env_file:
       - /root/env/user-env
+    volumes:
+      - /root/env/public.pem:/app/public.pem:ro
+    environment:
+      - PUBLIC_KEY_PATH=/app/public.pem
 
   prometheus:
     image: prom/prometheus:latest
