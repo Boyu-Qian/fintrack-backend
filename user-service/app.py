@@ -1,7 +1,7 @@
-from flask import Flask
+from flask import Flask, request, Response
 from db import db
 from config import Config
-from time import time
+import time
 from users.models import User
 from prometheus_client import Counter, Histogram ,generate_latest, CONTENT_TYPE_LATEST
 from users.routes import bp as users_bp
@@ -9,16 +9,16 @@ from flask_cors import CORS
 
 app = Flask(__name__)
 
-REQUEST_COUNT = Counter('app_requests_total', 'Total app requests', ['method', 'endpoint'])
+REQUEST_COUNT = Counter('app_requests_total', 'Total app requests', ['method', 'endpoint','status_code'])
 REQUEST_LATENCY = Histogram('http_request_latency_seconds', 'Request latency', ['endpoint'])
 
 @app.before_request
 def before_request():
-    request.start_time = time()
+    request.start_time = time.time()
 
 @app.after_request
 def after_request(response):
-    latency = time() - request.start_time
+    latency = time.time() - request.start_time
     REQUEST_LATENCY.labels(request.path).observe(latency)
     REQUEST_COUNT.labels(request.method, request.path, response.status_code).inc()
     return response

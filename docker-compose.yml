@@ -9,9 +9,11 @@ services:
       - /root/env/user-env
     volumes:
       - /root/env/private.pem:/app/private.pem:ro
+      - /etc/localtime:/etc/localtime:ro
+      - /etc/timezone:/etc/timezone:ro
     environment:
       - PRIVATE_KEY_PATH=/app/private.pem
-
+      - TZ=America/Toronto
   transaction-service:
     build: ./transaction-service
     container_name: backend-transaction-service
@@ -21,9 +23,11 @@ services:
       - /root/env/user-env
     volumes:
       - /root/env/public.pem:/app/public.pem:ro
+      - /etc/localtime:/etc/localtime:ro
+      - /etc/timezone:/etc/timezone:ro
     environment:
       - PUBLIC_KEY_PATH=/app/public.pem
-
+      - TZ=America/Toronto
   prometheus:
     image: prom/prometheus:latest
     container_name: prometheus
