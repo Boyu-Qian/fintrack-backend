@@ -1,0 +1,7 @@
+.idea/
+.vscode/
+
+**/.venv/
+**/*.pem
+**/.idea
+**/.vscode

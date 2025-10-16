@@ -1,0 +1,26 @@
+version: "3.8"
+services:
+  user-service:
+    build: ./user-service
+    container_name: user-service
+    ports:
+      - "32222:32222"
+    env_file:
+      - /root/env/user-env
+
+  transaction-service:
+    build: ./transaction-service
+    container_name: transaction-service
+    ports:
+      - "32223:32223"
+    env_file:
+      - /root/env/user-env
+
+  prometheus:
+    image: prom/prometheus:latest
+    container_name: prometheus
+    ports:
+      - "9090:9090"
+    volumes:
+      - ./prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
+      - ./prometheus/data:/prometheus
