@@ -1,8 +1,5 @@
 import os
 
-with open("private.pem") as f:
-  PRIVATE_KEY = f.read()
-
 class Config:
     try:
         DB_USER = os.environ["POSTGRES_USER"]
