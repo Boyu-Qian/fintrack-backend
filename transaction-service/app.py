@@ -2,6 +2,7 @@ from flask import Flask
 from db import db
 from flask_cors import CORS
 from config import Config
+from time import time
 from prometheus_client import Counter, Histogram ,generate_latest, CONTENT_TYPE_LATEST
 from transactions.routes import transactions_bp
 from transactions.models import Transaction

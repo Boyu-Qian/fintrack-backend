@@ -1,6 +1,7 @@
 from flask import Flask
 from db import db
 from config import Config
+from time import time
 from users.models import User
 from prometheus_client import Counter, Histogram ,generate_latest, CONTENT_TYPE_LATEST
 from users.routes import bp as users_bp
