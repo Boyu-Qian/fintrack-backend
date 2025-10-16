@@ -2,7 +2,7 @@ version: "3.8"
 services:
   user-service:
     build: ./user-service
-    container_name: user-service
+    container_name: backend-user-service
     ports:
       - "32222:32222"
     env_file:
@@ -14,7 +14,7 @@ services:
 
   transaction-service:
     build: ./transaction-service
-    container_name: transaction-service
+    container_name: backend-transaction-service
     ports:
       - "32223:32223"
     env_file:
