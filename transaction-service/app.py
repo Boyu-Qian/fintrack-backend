@@ -17,9 +17,11 @@ def before_request():
 
 @app.after_request
 def after_request(response):
+    if request.path in ["/metrics", "/favicon.ico", "/healthz"]:
+        return response
     latency = time.time() - request.start_time
-    REQUEST_LATENCY.labels(request.path).observe(latency)
-    REQUEST_COUNT.labels(request.method, request.path, response.status_code).inc()
+    REQUEST_LATENCY.labels(request.endpoint).observe(latency)
+    REQUEST_COUNT.labels(request.method, request.endpoint, str(response.status_code)).inc()
     return response
 
 @app.route("/metrics")
