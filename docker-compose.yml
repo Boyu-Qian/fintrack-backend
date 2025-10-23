@@ -1,4 +1,3 @@
-version: "3.8"
 services:
   user-service:
     build: ./user-service
@@ -49,3 +48,15 @@ services:
       - ./grafana/provisioning/datasources:/etc/grafana/provisioning/datasources
       - ./grafana/provisioning/dashboards:/etc/grafana/provisioning/dashboards
       - ./grafana/dashboards:/var/lib/grafana/dashboards
+  redis:
+    image: redis:7
+    container_name: redis
+    ports:
+      - "6379:6379"
+    env_file:
+      - /root/env/user-env
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - /etc/timezone:/etc/timezone:ro
+    environment:
+      - TZ=America/Toronto
