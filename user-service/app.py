@@ -2,10 +2,8 @@ from flask import Flask, request, Response
 from db import db
 from config import Config
 import time
-from logging.config import dictConfig
 from prometheus_client import Counter, Histogram , Gauge ,generate_latest, CONTENT_TYPE_LATEST
 from users.routes import bp as users_bp
-from redis_client import redis_client as cache
 from flask_cors import CORS
 
 app = Flask(__name__)
