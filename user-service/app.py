@@ -4,16 +4,30 @@ from config import Config
 import time
 from users.models import User
 import logging
+from logging.config import dictConfig
 from prometheus_client import Counter, Histogram , Gauge ,generate_latest, CONTENT_TYPE_LATEST
 from users.routes import bp as users_bp
 from redis_client import redis_client as cache
 from flask_cors import CORS
 import sys
 
+dictConfig({
+    'version': 1,
+    'formatters': {'default': {
+        'format': '[%(asctime)s] %(levelname)s in %(module)s: %(message)s',
+    }},
+    'handlers': {'wsgi': {
+        'class': 'logging.StreamHandler',
+        'stream': 'ext://flask.logging.wsgi_errors_stream',
+        'formatter': 'default'
+    }},
+    'root': {
+        'level': 'INFO',
+        'handlers': ['wsgi']
+    }
+})
+
 app = Flask(__name__)
-gunicorn_logger = logging.getLogger('gunicorn.error')
-app.logger.handlers = gunicorn_logger.handlers
-app.logger.setLevel(logging.INFO)
 
 REQUEST_COUNT = Counter('app_requests_total', 'Total app requests', ['method', 'endpoint','status_code'])
 REQUEST_LATENCY = Histogram('http_request_latency_seconds', 'Request latency', ['endpoint'])
@@ -46,7 +60,7 @@ with app.app_context():
 ### Testing Redis
 try:
     cache.set("test-user-service","user-service:success!")
-    app.logger.info(f"Redis connection test:{cache.get('test-user-service')}")
+    app.logger.warning(f"Redis connection test:{cache.get('test-user-service')}")
 except Exception as e:
     app.logger.error(f"Redis failed:{e}")
 
