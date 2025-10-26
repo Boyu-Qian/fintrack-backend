@@ -10,3 +10,4 @@
 .DS_Store
 **/venv/
 prometheus/data/
+**.sh
