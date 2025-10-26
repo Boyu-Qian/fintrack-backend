@@ -11,22 +11,6 @@ from redis_client import redis_client as cache
 from flask_cors import CORS
 import sys
 
-dictConfig({
-    'version': 1,
-    'formatters': {'default': {
-        'format': '[%(asctime)s] %(levelname)s in %(module)s: %(message)s',
-    }},
-    'handlers': {'wsgi': {
-        'class': 'logging.StreamHandler',
-        'stream': 'ext://flask.logging.wsgi_errors_stream',
-        'formatter': 'default'
-    }},
-    'root': {
-        'level': 'INFO',
-        'handlers': ['wsgi']
-    }
-})
-
 app = Flask(__name__)
 gunicorn_logger = logging.getLogger('gunicorn.error')
 app.logger.handlers = gunicorn_logger.handlers
@@ -62,7 +46,7 @@ with app.app_context():
 ### Testing Redis
 try:
     cache.set("test-user-service","user-service:success!")
-    app.logger.warning(f"Redis connection test:{cache.get('test-user-service')}")
+    app.logger.error(f"Redis connection test:{cache.get('test-user-service')}")
 except Exception as e:
     app.logger.error(f"Redis failed:{e}")
 
