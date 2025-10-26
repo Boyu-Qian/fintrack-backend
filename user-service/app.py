@@ -3,12 +3,17 @@ from db import db
 from config import Config
 import time
 from users.models import User
+import logging
 from prometheus_client import Counter, Histogram , Gauge ,generate_latest, CONTENT_TYPE_LATEST
 from users.routes import bp as users_bp
 from redis_client import redis_client as cache
 from flask_cors import CORS
+import sys
 
 app = Flask(__name__)
+gunicorn_logger = logging.getLogger('gunicorn.error')
+app.logger.handlers = gunicorn_logger.handlers
+app.logger.setLevel(gunicorn_logger.level)
 
 REQUEST_COUNT = Counter('app_requests_total', 'Total app requests', ['method', 'endpoint','status_code'])
 REQUEST_LATENCY = Histogram('http_request_latency_seconds', 'Request latency', ['endpoint'])
