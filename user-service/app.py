@@ -13,7 +13,7 @@ import sys
 app = Flask(__name__)
 gunicorn_logger = logging.getLogger('gunicorn.error')
 app.logger.handlers = gunicorn_logger.handlers
-app.logger.setLevel(gunicorn_logger.level)
+app.logger.setLevel(logging.INFO)
 
 REQUEST_COUNT = Counter('app_requests_total', 'Total app requests', ['method', 'endpoint','status_code'])
 REQUEST_LATENCY = Histogram('http_request_latency_seconds', 'Request latency', ['endpoint'])
