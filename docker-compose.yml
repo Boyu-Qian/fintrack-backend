@@ -64,6 +64,7 @@ services:
     volumes:
       - /etc/localtime:/etc/localtime:ro
       - /etc/timezone:/etc/timezone:ro
+      - /etc/redis/redis.conf:/usr/local/etc/redis/redis.conf:ro
     environment:
       - TZ=America/Toronto
-    command: ["redis-server", "/root/env/redis.conf"]
+    command: ["redis-server", "/usr/local/etc/redis/redis.conf"]
