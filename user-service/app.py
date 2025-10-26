@@ -38,12 +38,12 @@ db.init_app(app)
 with app.app_context():
     print("✅ All tables already exist:", db.metadata.tables.keys())
 
-### Testing Redis
-try:
-    cache.set("test-user-service","user-service:success!")
-    app.logger.error(f"Redis connection test:{cache.get('test-user-service')}")
-except Exception as e:
-    app.logger.error(f"Redis failed:{e}")
+# ### Testing Redis
+# try:
+#     cache.set("test-user-service","user-service:success!")
+#     app.logger.error(f"Redis connection test:{cache.get('test-user-service')}")
+# except Exception as e:
+#     app.logger.error(f"Redis failed:{e}")
 
 app.register_blueprint(users_bp, url_prefix='/api/users')
 
