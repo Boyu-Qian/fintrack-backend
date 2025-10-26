@@ -46,7 +46,7 @@ with app.app_context():
 ### Testing Redis
 try:
     cache.set("test-user-service","user-service:success!")
-    app.logger.info(f"Redis connection test:{cache.get("test-user-service")}")
+    app.logger.info(f"Redis connection test:{cache.get('test-user-service')}")
 except Exception as e:
     app.logger.error(f"Redis failed:{e}")
 
