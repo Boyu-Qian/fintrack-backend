@@ -3,7 +3,7 @@ from db import db
 from config import Config
 import time
 from users.models import User
-from prometheus_client import Counter, Histogram ,generate_latest, CONTENT_TYPE_LATEST
+from prometheus_client import Counter, Histogram , Gauge ,generate_latest, CONTENT_TYPE_LATEST
 from users.routes import bp as users_bp
 from redis_client import redis_client as cache
 from flask_cors import CORS
@@ -39,8 +39,11 @@ with app.app_context():
     print("✅ All tables already exist:", db.metadata.tables.keys())
 
 ### Testing Redis
-cache.set("test-user-service","user-service:success!")
-print(cache.get("test-user-service"))
+try:
+    cache.set("test-user-service","user-service:success!")
+    app.logger.info(f"Redis connection test:{cache.get("test-user-service")}")
+catch Exception as e:
+    app.logger.error(f"Redis failed:{e}")
 
 app.register_blueprint(users_bp, url_prefix='/api/users')
 
