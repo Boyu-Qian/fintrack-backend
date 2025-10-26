@@ -42,7 +42,7 @@ with app.app_context():
 try:
     cache.set("test-user-service","user-service:success!")
     app.logger.info(f"Redis connection test:{cache.get("test-user-service")}")
-catch Exception as e:
+except Exception as e:
     app.logger.error(f"Redis failed:{e}")
 
 app.register_blueprint(users_bp, url_prefix='/api/users')
