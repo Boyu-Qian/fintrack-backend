@@ -53,6 +53,12 @@ services:
     container_name: redis
     ports:
       - "6379:6379"
+    deploy:
+      resources:
+        limits:
+          memory: 1.5g
+        reservations:
+          memory: 1g
     env_file:
       - /root/env/user-env
     volumes:
@@ -60,3 +66,4 @@ services:
       - /etc/timezone:/etc/timezone:ro
     environment:
       - TZ=America/Toronto
+    command: ["redis-server", "/root/env/redis.conf"]
