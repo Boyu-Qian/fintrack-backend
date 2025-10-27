@@ -39,6 +39,8 @@ with app.app_context():
 
 ### Testing Redis
 try:
+    app.logger.info("Testing Redis")
+    time.sleep(5)
     redis_client.set("test-user-service","user-service:success!")
     value = redis_client.get("test-user-service")
     if value:
