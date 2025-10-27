@@ -9,6 +9,7 @@ from users.services import (create_user,
                             get_all_users,
                             authenticate_user
                             )
+from redis_client import redis_client
 
 bp = Blueprint('users', __name__, url_prefix='/api/users')
 
@@ -17,6 +18,9 @@ def create_user_route():
     data = request.get_json()
     schema = UserSchema()
     errors = schema.validate(data)
+    redis_client.set("foo", "bar")
+    value = redis_client.get("foo")
+    print(value)
     if errors:
         print(errors.items())
         return jsonify(errors=errors), 400
