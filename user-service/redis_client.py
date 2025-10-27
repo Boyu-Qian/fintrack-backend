@@ -1,6 +1,5 @@
 import os
 import redis
-import time
 
 HOST = os.getenv("REDIS_HOST")
 PORT = int(os.getenv("REDIS_PORT"))

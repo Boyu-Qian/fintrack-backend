@@ -40,7 +40,10 @@ with app.app_context():
 ### Testing Redis
 try:
     redis_client.set("test-user-service","user-service:success!")
-    app.logger.error(f"Redis connection test:{redis_client.get('test-user-service')}")
+    value = redis_client.get("test-user-service")
+    if value:
+        value = value.decode("utf-8")
+    app.logger.error(f"Redis connection test:{value}")
 except Exception as e:
     app.logger.error(f"Redis failed:{e}")
 
