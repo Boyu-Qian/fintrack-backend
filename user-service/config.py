@@ -2,6 +2,7 @@ import os
 
 class Config:
     try:
+        print("hola")
         DB_USER = os.environ["POSTGRES_USER"]
         DB_PASSWORD = os.environ["POSTGRES_PASSWORD"]
         DB_HOST = os.environ["POSTGRES_HOST"]
@@ -12,7 +13,7 @@ class Config:
     SQLALCHEMY_DATABASE_URI = (
         f"postgresql://{DB_USER}:{DB_PASSWORD}@{DB_HOST}:{DB_PORT}/{DB_NAME}?sslmode=disable"
         )
-    print(SQLALCHEMY_DATABASE_URI)
+    print("sutff", SQLALCHEMY_DATABASE_URI)
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     PRIVATE_KEY_PATH = os.environ.get("PRIVATE_KEY_PATH", "app/private.pem")
     if os.path.exists(PRIVATE_KEY_PATH):
