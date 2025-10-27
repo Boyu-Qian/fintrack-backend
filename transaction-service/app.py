@@ -8,6 +8,7 @@ from transactions.routes import transactions_bp
 from transactions.models import Transaction
 app = Flask(__name__)
 
+print("hooola")
 REQUEST_COUNT = Counter('app_requests_total', 'Total app requests', ['method', 'endpoint','status_code'])
 REQUEST_LATENCY = Histogram('http_request_latency_seconds', 'Request latency', ['endpoint'])
 
@@ -29,8 +30,11 @@ def metrics():
     return Response(generate_latest(), mimetype=CONTENT_TYPE_LATEST)
 
 
+print("hoola")
 CORS(app,origins=["http://localhost:8080,http://localhost:5173", "https://www.fintrack.site", "https://fintrack.site"],supports_credentials=True)
+print("hhooooola")
 app.config.from_object(Config)
+print("hhholla")
 db.init_app(app)
 
 with app.app_context():
