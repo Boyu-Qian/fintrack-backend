@@ -19,8 +19,11 @@ def create_user_route():
     schema = UserSchema()
     errors = schema.validate(data)
     print("FUKKKKKKKK")
-    redis_client.set("foo", "bar")
-    value = redis_client.get("foo")
+    try:
+        redis_client.set("foo", "bar")
+        value = redis_client.get("foo")
+    except Exception as e:
+        print(f"{e}")
     app.logger.error("Hola prolbem ends here")
     print(value)
     if errors:
