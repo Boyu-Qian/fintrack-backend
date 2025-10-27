@@ -2,7 +2,7 @@ import os
 import redis
 import time
 
-HOST = os.getenv("REDIS_HOST")
+HOST = redis
 PORT = int(os.getenv("REDIS_PORT"))
 PASSWORD = os.getenv("REDIS_PASSWORD")
 DB = 0
