@@ -6,4 +6,4 @@ RUN pip install --no-cache-dir -r requirements.txt
 
 COPY . .
 
-CMD ["gunicorn", "-w", "4","-b", "0.0.0.0:32223", "app:app", "--access-logfile","-","--error-logfile","-" ]
+CMD ["gunicorn", "-w", "4","-b", "0.0.0.0:32223", "app:app" ]
