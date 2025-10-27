@@ -30,11 +30,10 @@ def metrics():
     return Response(generate_latest(), mimetype=CONTENT_TYPE_LATEST)
 
 
-print("hoola")
 CORS(app,origins=["http://localhost:8080,http://localhost:5173", "https://www.fintrack.site", "https://fintrack.site"],supports_credentials=True)
-print("hhooooola")
+
 app.config.from_object(Config)
-print("hhholla")
+
 db.init_app(app)
 
 with app.app_context():

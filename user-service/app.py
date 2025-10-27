@@ -28,10 +28,13 @@ def after_request(response):
 @app.route("/metrics")
 def metrics():
     return Response(generate_latest(), mimetype=CONTENT_TYPE_LATEST)
-
+    
+print("HOOOOLA")
 CORS(app,origins=["http://localhost:8080,http://localhost:5173,*"],  # 前端地址
     supports_credentials=True  )
+print("HOOOOLAAAAAA")
 app.config.from_object(Config)
+print("HOOLLLLOOLAAAAAA")
 db.init_app(app)
 
 with app.app_context():
