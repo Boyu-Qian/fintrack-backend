@@ -5,7 +5,7 @@ import urllib.parse
 
 HOST = "72.60.125.214"
 PORT = 6379
-PASSWORD = urllib.parse.quote("AsDfQwEr#$123")
+PASSWORD = "AsDfQwEr123777"
 DB = 0
 redis_url = f"redis://:{PASSWORD}@{HOST}:{PORT}/{DB}"
 redis_client = redis.Redis.from_url(redis_url)
