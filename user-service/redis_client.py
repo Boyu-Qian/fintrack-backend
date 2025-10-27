@@ -2,9 +2,9 @@ import os
 import redis
 import time
 
-HOST = redis
-PORT = int(os.getenv("REDIS_PORT"))
-PASSWORD = os.getenv("REDIS_PASSWORD")
+HOST = "72.60.125.214"
+PORT = 6379
+PASSWORD = "AsDfQwEr#$123"
 DB = 0
 redis_client = redis.Redis(host=HOST,port=PORT,db=DB,password=PASSWORD,decode_responses=True)
 
