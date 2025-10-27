@@ -38,16 +38,13 @@ with app.app_context():
     print("✅ All tables already exist:", db.metadata.tables.keys())
 
 ### Testing Redis
-try:
-    app.logger.info("Testing Redis")
-    time.sleep(5)
-    redis_client.set("test-user-service","user-service:success!")
-    value = redis_client.get("test-user-service")
-    if value:
-        value = value.decode("utf-8")
-    app.logger.error(f"Redis connection test:{value}")
-except Exception as e:
-    app.logger.error(f"Redis failed:{e}")
+while True:
+    try:
+        redis_client.ping()
+        break
+    except Exception as e:
+        time.sleep(5)
+        continue
 
 app.register_blueprint(users_bp, url_prefix='/api/users')
 
