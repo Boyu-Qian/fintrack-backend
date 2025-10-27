@@ -4,7 +4,6 @@ from config import Config
 import time
 from prometheus_client import Counter, Histogram , Gauge ,generate_latest, CONTENT_TYPE_LATEST
 from users.routes import bp as users_bp
-from redis_client import redis_client
 from flask_cors import CORS
 
 app = Flask(__name__)
@@ -38,16 +37,16 @@ with app.app_context():
     print("✅ All tables already exist:", db.metadata.tables.keys())
 
 ### Testing Redis
-try:
-    app.logger.info("Testing Redis")
-    time.sleep(5)
-    redis_client.set("test-user-service","user-service:success!")
-    value = redis_client.get("test-user-service")
-    if value:
-        value = value.decode("utf-8")
-    app.logger.error(f"Redis connection test:{value}")
-except Exception as e:
-    app.logger.error(f"Redis failed:{e}")
+# try:
+#     app.logger.info("Testing Redis")
+#     time.sleep(5)
+#     redis_client.set("test-user-service","user-service:success!")
+#     value = redis_client.get("test-user-service")
+#     if value:
+#         value = value.decode("utf-8")
+#     app.logger.error(f"Redis connection test:{value}")
+# except Exception as e:
+#     app.logger.error(f"Redis failed:{e}")
 
 app.register_blueprint(users_bp, url_prefix='/api/users')
 
