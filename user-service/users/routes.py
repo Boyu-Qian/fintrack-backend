@@ -18,8 +18,10 @@ def create_user_route():
     data = request.get_json()
     schema = UserSchema()
     errors = schema.validate(data)
+    app.logger.error("Fuk we got a Hola prolbem")
     redis_client.set("foo", "bar")
     value = redis_client.get("foo")
+    app.logger.error("Hola prolbem ends here")
     print(value)
     if errors:
         print(errors.items())
