@@ -1,7 +1,6 @@
 import os
 import redis
 import time
-import urllib.parse
 
 HOST = "72.60.125.214"
 PORT = 6379

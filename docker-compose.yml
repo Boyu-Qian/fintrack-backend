@@ -2,6 +2,8 @@ services:
   user-service:
     build: ./user-service
     container_name: backend-user-service
+    depends_on:
+      - redis
     ports:
       - "32222:32222"
     env_file:
@@ -16,6 +18,8 @@ services:
   transaction-service:
     build: ./transaction-service
     container_name: backend-transaction-service
+    depends_on:
+      - redis
     ports:
       - "32223:32223"
     env_file:
