@@ -2,7 +2,7 @@ import os
 import redis
 import time
 
-HOST = redis
+HOST = "redis"
 PORT = 6379
 PASSWORD = "AsDfQwEr123777"
 DB = 0
