@@ -7,7 +7,7 @@ PORT = int(os.getenv("REDIS_PORT"))
 PASSWORD = os.getenv("REDIS_PASSWORD")
 DB = 0
 
-redis_client = redis.Redis(host=HOST,port=PORT,password=PASSWORD,db=DB,decode_responses=True)
+redis_client = redis.Redis(host=HOST,username="default",port=PORT,password=PASSWORD,db=DB,decode_responses=True)
 
 if __name__ == "__main__":
     try:
