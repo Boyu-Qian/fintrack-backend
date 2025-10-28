@@ -29,25 +29,27 @@ def after_request(response):
 def metrics():
     return Response(generate_latest(), mimetype=CONTENT_TYPE_LATEST)
 
-print("HOOOOLA")
+
 CORS(app,origins=["http://localhost:8080,http://localhost:5173,*"],  # 前端地址
     supports_credentials=True  )
-print("HOOOOLAAAAAA")
+
 app.config.from_object(Config)
-print("HOOLLLLOOLAAAAAA")
+
 db.init_app(app)
 
 with app.app_context():
     print("✅ All tables already exist:", db.metadata.tables.keys())
 
 ### Testing Redis
-# while True:
-#     try:
-#         redis_client.ping()
-#         break
-#     except Exception as e:
-#         time.sleep(5)
-#         continue
+while True:
+    try:
+        redis_client.ping()
+        print("Redis up!")
+        break
+    except Exception as e:
+        print("Connection to Redis failed,retry in 5 seconds")
+        time.sleep(5)
+        continue
 
 app.register_blueprint(users_bp, url_prefix='/api/users')
 

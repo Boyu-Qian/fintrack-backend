@@ -18,13 +18,6 @@ def create_user_route():
     data = request.get_json()
     schema = UserSchema()
     errors = schema.validate(data)
-    print("FUKKKKKKKK")
-    try:
-        redis_client.set("foo", "bar")
-        value = redis_client.get("foo")
-        print(value)
-    except Exception as e:
-        print(f"Redis mistake: {e}")
     if errors:
         print(errors.items())
         return jsonify(errors=errors), 400
