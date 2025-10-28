@@ -44,11 +44,12 @@ with app.app_context():
 while True:
     try:
         redis_client.ping()
-        print("Redis up!")
+        print("Redis up from main!")
         break
     except Exception as e:
+        import traceback
         print("Connection to Redis failed,retry in 5 seconds")
-        time.sleep(5)
+        traceback.print_exc()
         continue
 
 app.register_blueprint(users_bp, url_prefix='/api/users')

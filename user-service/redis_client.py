@@ -6,12 +6,8 @@ HOST = os.getenv("REDIS_HOST")
 PORT = int(os.getenv("REDIS_PORT"))
 PASSWORD = os.getenv("REDIS_PASSWORD")
 DB = 0
-try:
-    redis_client = redis.Redis(host=HOST,username="default",port=PORT,password=PASSWORD,db=DB,decode_responses=True)
-    print("Redis Good!")
-except Exception as e:
-    import traceback
-    traceback.print_exc()
+
+redis_client = redis.Redis(host=HOST,username="default",port=PORT,password=PASSWORD,db=DB,decode_responses=True)
 
 if __name__ == "__main__":
     try:
