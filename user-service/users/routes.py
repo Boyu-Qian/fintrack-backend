@@ -24,7 +24,6 @@ def create_user_route():
         value = redis_client.get("foo")
     except Exception as e:
         print(f"{e}")
-    app.logger.error("Hola prolbem ends here")
     print(value)
     if errors:
         print(errors.items())

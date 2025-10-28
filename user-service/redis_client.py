@@ -6,8 +6,7 @@ HOST = redis
 PORT = 6379
 PASSWORD = "AsDfQwEr123777"
 DB = 0
-redis_url = f"redis://:{PASSWORD}@{HOST}:{PORT}/{DB}"
-redis_client = redis.Redis.from_url(redis_url)
+redis_client = redis.Redis(host=HOST,port=PORT,password=PASSWORD,db=DB,decode_responses=True)
 
 if __name__ == "__main__":
     try:
