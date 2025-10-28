@@ -3,13 +3,20 @@ import redis
 import time
 
 HOST = os.getenv("REDIS_HOST")
-PORT = os.getenv("REDIS_PORT")
+PORT = int(os.getenv("REDIS_PORT"))
 PASSWORD = os.getenv("REDIS_PASSWORD")
 DB = 0
-redis_client = redis.Redis(host=HOST,port=PORT,password=PASSWORD,db=DB,decode_responses=True)
+try:
+    redis_client = redis.Redis(host=HOST,port=PORT,password=PASSWORD,db=DB,decode_responses=True)
+    print("Redis Good!")
+except Exception as e:
+    print("Redis connection issue:{e}")
 
 if __name__ == "__main__":
     try:
+        print(type(HOST))
+        print(type(PORT))
+        print(type(PASSWORD))
         # 先 ping 一下
         print("PING:", redis_client.ping())
 
