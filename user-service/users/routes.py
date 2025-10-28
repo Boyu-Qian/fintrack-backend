@@ -24,7 +24,7 @@ def create_user_route():
         value = redis_client.get("foo")
         print(value)
     except Exception as e:
-        print(f"{e}")
+        print(f"Redis mistake: {e}")
     if errors:
         print(errors.items())
         return jsonify(errors=errors), 400
